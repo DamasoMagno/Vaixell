@@ -1,0 +1,15 @@
+.sectionTitle {
+  font-size: 2rem;
+  display: flex;
+
+  @media (max-width: 728px) {
+    margin-left: 0;
+  }
+
+  .enphase {
+    background: linear-gradient(180deg, #101c19 0%, rgba(16, 28, 25, 0) 100%);
+    width: 10px;
+    display: inline-block;
+    margin-right: 1rem;
+  }
+}

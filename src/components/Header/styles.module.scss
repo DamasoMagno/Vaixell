@@ -1,0 +1,32 @@
+.headerContainer {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  top: 0;
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      padding: 1rem 1rem;
+
+      a {
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+
+        & + a {
+          margin-left: 1.5rem;
+        }
+      }
+    }
+  }
+}

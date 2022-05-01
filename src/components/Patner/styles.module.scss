@@ -1,0 +1,51 @@
+.patnerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1rem;
+  border: 3px solid #3333;
+  transition: 0.25s;
+  border-radius: 0.25rem;
+  color: #fff;
+
+  &:hover {
+    border: 3px solid #101c19;
+    transform: scale(1.025);
+  }
+
+  .patnerAbout {
+    h3 {
+      font-size: 1.85rem;
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    small {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: .9rem;
+    }
+
+    div {
+      margin-top: .25rem;
+      display: flex;
+      align-items: center;
+
+      strong {
+        font-size: 1.5rem;
+        margin-right: .5rem;
+      }
+
+      p {
+        background-color: #101c19;
+        padding: .5rem .5rem;
+        font-size: .85rem;
+        border-radius: 0.15rem;
+      }
+    }
+  }
+
+  img {
+    width: 8rem;
+    object-fit: cover;
+  }
+}

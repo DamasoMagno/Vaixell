@@ -1,0 +1,72 @@
+.formContainer {
+  background: linear-gradient(270deg, #060908 60%, rgba(0, 0, 0, 0.4) 100%),
+    url("/assets/wallpaperHome.svg") no-repeat center;
+  background-size: cover;
+  height: 100vh;
+
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+
+    form {
+      display: flex;
+      width: 50%;
+      flex-direction: column;
+      justify-content: center;
+
+      label {
+        margin: 1.5rem 0 0.5rem;
+        font-size: 1.25rem;
+      }
+
+      input,
+      select {
+        background: transparent;
+        height: 3.5rem;
+        border: 1px solid #333;
+        font-size: 1.25rem;
+        color: #fff;
+        padding: 0.25rem 1rem;
+        -webkit-appearance: none;
+        border-radius: 0.15rem;
+
+        &::placeholder {
+          color: #333;
+        }
+      }
+
+      input[type="submit"] {
+        margin-top: 2rem;
+        background-color: #041511;
+        border: 0;
+        transition: background 0.25s;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #051611;
+        }
+      }
+
+      select {
+        color: #333;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    background: rgba(0, 0, 0, 0.4);
+
+    .content {
+      justify-content: center;
+
+      form {
+        width: 90%;
+      }
+    }
+  }
+}

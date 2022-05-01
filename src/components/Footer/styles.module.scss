@@ -1,0 +1,35 @@
+.footer {
+  background: linear-gradient(270.13deg, #041511 -0.53%, #090b0b 100%);
+  padding: 3rem 0;
+
+  div {
+    max-width: 1200px;
+    width: 90%;
+    margin: 0 auto;
+
+    strong {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    a {
+      background-color: rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(0, 0, 0, 0.5);
+      border-radius: 0.25rem;
+      color: #fff;
+      max-width: 250px;
+      width: 100%;
+      padding: 1rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      svg {
+        color: #333;
+        width: 1rem;
+        height: 1rem;
+      }
+    }
+  }
+}

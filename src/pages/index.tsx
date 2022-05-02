@@ -1,15 +1,13 @@
 
 import Image from "next/image";
 import { GetStaticProps } from "next";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Head from "next/head";
-import ReactPlayer from "react-player";
-import { MdArrowLeft, MdArrowRight } from "react-icons/md";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { HOME } from "../apollo/Home";
 import { apolloClient } from "../libs/apollo";
 import { Home } from "../types/Home";
-import { gql, useQuery } from "@apollo/client";
 
 import { SectionTitle } from "../components/SectionTitle";
 import { Contact } from "../components/Contact";
@@ -21,32 +19,49 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { useQuery } from "@apollo/client";
+import { gql } from "urql";
+import { Navigation, Pagination } from "swiper";
 
 type HomeProps = {
   home: Home;
 }
 
 export default function Homes({ home }: HomeProps) {
-  const [sectionHasStream, setSectionHasStream] = useState(false);
+  const { partners, contacts, teams } = home;
+  const [playersByTeam, setPlayersByTeam] = useState("Valorant");
 
-  const carouselNavigation = useRef<HTMLDivElement>(null);
+  const { data } = useQuery(
+    gql`
+      {
+        team (where: { game: "${playersByTeam}" }){
+          players {
+            id
+            name
+          }
+        }
+      }
+    `
+  );
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setSectionHasStream(true);
-    }
-  }, []);
+  function handleShowTeam(name: string) {
+    const buttons = document.querySelectorAll("nav button");
 
-  function left() {
-    const carouselExists = carouselNavigation.current as HTMLDivElement;
-    carouselExists.scrollLeft -= carouselExists.offsetWidth;
+    let buttonAlreadySelecioned: Element;
+
+    setPlayersByTeam(name)
+
+    buttons.forEach((btn: Element) => {
+      if (btn.ariaSelected === 'true') {
+        buttonAlreadySelecioned = btn;
+      }
+
+      btn.addEventListener("click", () => {
+        buttonAlreadySelecioned.ariaSelected = 'false';
+        btn.ariaSelected = 'true';
+      });
+    });
   }
-
-  function right() {
-    const carouselExists = carouselNavigation.current as HTMLDivElement;
-    carouselExists.scrollLeft += carouselExists.offsetWidth;
-  }
-
 
   return (
     <>
@@ -67,48 +82,58 @@ export default function Homes({ home }: HomeProps) {
         </div>
       </section>
 
-      <section className={styles.teamContainer} id="#teams">
-        <SectionTitle>Nossos Times</SectionTitle>
-
-
-        <nav className={styles.teamNavigation} ref={carouselNavigation}>
-          <button>Valorant</button>
-
-          <button
-            className={styles.navigationLeft}
-            onClick={left}
-          >
-            <MdArrowLeft />
-          </button>
-          <button
-            className={styles.navigationRight}
-            onClick={right}
-          >
-            <MdArrowRight />
-          </button>
-        </nav>
-      </section>
-
-      <section className={styles.streamContainer}>
+      <section className={styles.teamContainer}>
         <div>
-          <SectionTitle>Nossas Lives</SectionTitle>
+          <SectionTitle>Nossos Times</SectionTitle>
 
-          {sectionHasStream && (
-            <ReactPlayer
-              url={home.twitch}
-              width='100%'
-              height='30rem'
-            />
-          )}
+          <nav className={styles.chooseTeam}>
+            {teams.map((team, index) => {
+              return (
+                <button
+                  key={team.id}
+                  onClick={() => handleShowTeam(team.game)}
+                  aria-selected={index === 0 ? 'true' : 'false'}
+                >
+                  {team.game}
+                </button>
+              );
+            })}
+          </nav>
+
+          <div className={styles.playersTeam}>
+            <Swiper
+              modules={[Navigation, Pagination]}
+              spaceBetween={15}
+              breakpoints={{
+                450: {
+                  width: 500,
+                  slidesPerView: 3
+                },
+                728: {
+                  width: 1200,
+                  slidesPerView: 4.5
+                }
+              }}
+            >
+              {data?.team.players.map((player: any) => (
+                <SwiperSlide key={player.id}>
+                  <div className={styles.player}>
+                    <strong>{player.name}</strong>
+                    <img src="/assets/player.svg" alt={`Foto do jogador ${player.name}`} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </section>
 
-      <section className={styles.patnerContainer} id="#patners">
+      <section className={styles.patnerContainer}>
         <div className={styles.content}>
           <SectionTitle>Parcerias</SectionTitle>
 
           <div className={styles.patners}>
-            {home.partners.map(patner => {
+            {partners.map(patner => {
               return (
                 <Patner
                   key={patner.id}
@@ -123,7 +148,7 @@ export default function Homes({ home }: HomeProps) {
         </div>
       </section>
 
-      <section className={styles.contactsContainer} id="#contacts">
+      <section className={styles.contactsContainer}>
         <div className={styles.content}>
           <SectionTitle>Redes Sociais</SectionTitle>
           <p>
@@ -132,17 +157,15 @@ export default function Homes({ home }: HomeProps) {
           </p>
 
           <div className={styles.socialsMedia}>
-            {home.contacts.map(contact => {
-              return (
-                <Contact
-                  key={contact.id}
-                  description="Entre e divirta-se conosco"
-                  name={contact.name}
-                  url={contact.address}
-                  icon={contact.icon}
-                />
-              )
-            })}
+            {contacts.map(contact => (
+              <Contact
+                key={contact.id}
+                description="Entre e divirta-se conosco"
+                name={contact.name}
+                url={contact.address}
+                icon={contact.icon}
+              />
+            ))}
           </div>
         </div>
       </section>

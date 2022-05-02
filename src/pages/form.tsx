@@ -24,11 +24,11 @@ export default function Form() {
             <label htmlFor="email">E-mail</label>
             <input
               type="text"
-              id="Email"
+              id="email"
             />
 
-            <label htmlFor="Time">Time</label>
-            <select>
+            <label htmlFor="team">Time</label>
+            <select id="team">
               <option value="Valorant">Valorant</option>
               <option value="Fortnite">Fortnite</option>
             </select>

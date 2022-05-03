@@ -1,7 +1,7 @@
 
 import Image from "next/image";
 import { GetStaticProps } from "next";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -46,21 +46,20 @@ export default function Homes({ home }: HomeProps) {
 
   function handleShowTeam(name: string) {
     const buttons = document.querySelectorAll("nav button");
-
     let buttonAlreadySelecioned: Element;
-
-    setPlayersByTeam(name)
 
     buttons.forEach((btn: Element) => {
       if (btn.ariaSelected === 'true') {
         buttonAlreadySelecioned = btn;
       }
-
+      
       btn.addEventListener("click", () => {
         buttonAlreadySelecioned.ariaSelected = 'false';
-        btn.ariaSelected = 'true';
-      });
+        btn.ariaSelected = "true";
+      })
     });
+
+    setPlayersByTeam(name)
   }
 
   return (
@@ -118,8 +117,8 @@ export default function Homes({ home }: HomeProps) {
               {data?.team.players.map((player: any) => (
                 <SwiperSlide key={player.id}>
                   <div className={styles.player}>
-                    <strong>{player.name}</strong>
                     <img src="/assets/player.svg" alt={`Foto do jogador ${player.name}`} />
+                    <strong>{player.name}</strong>
                   </div>
                 </SwiperSlide>
               ))}

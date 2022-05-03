@@ -1,6 +1,6 @@
 
 import Image from "next/image";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { useState } from "react";
 import Head from "next/head";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -172,7 +172,7 @@ export default function Homes({ home }: HomeProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSide: GetServerSideProps = async () => {
   const { data } = await apolloClient.query({ query: HOME });
 
   const page: Home = {
@@ -199,6 +199,5 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       home: page
     },
-    revalidate: 60
   }
 }

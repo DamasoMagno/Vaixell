@@ -25,7 +25,8 @@
       }
 
       input,
-      select {
+      select,
+      button {
         background: transparent;
         height: 3.5rem;
         border: 1px solid #333;
@@ -40,7 +41,7 @@
         }
       }
 
-      input[type="submit"] {
+      button {
         margin-top: 2rem;
         background-color: #041511;
         border: 0;

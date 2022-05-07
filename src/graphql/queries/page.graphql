@@ -1,0 +1,30 @@
+query Page($slug: String!) {
+  page(where: { slug: $slug }) {
+    id
+    title
+    description
+    twitch
+    partners {
+      id
+      name
+      addressSite
+      codeCoupon
+      percentageCoupon
+      icon {
+        url
+      }
+    }
+    teams {
+      id
+      game
+    }
+    contacts {
+      id
+      name
+      address
+      icon {
+        url
+      }
+    }
+  }
+}

@@ -1,42 +1,71 @@
 import Head from "next/head";
+import { FormEvent, useState } from "react";
+import { api } from "../services/api";
 
-import { Footer } from "../components/Footer";
-import { Header } from "../components/Header";
-
-import styles from "../styles/Form.module.scss";
+import styles from "../styles/pages/Enlist.module.scss";
 
 export default function Form() {
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [team, setTeam] = useState<string>("");
+
+  async function handleEnlistUser(e: FormEvent) {
+    e.preventDefault();
+
+    try {
+      const data = {
+        name,
+        email,
+        team
+      }
+
+      const response = await api.post("/", { data });
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <Head>
         <title>Vaixell - Alistar-se</title>
       </Head>
 
-      <main className={styles.formContainer}>
-        <section className={styles.content}>
-          <form>
-            <label htmlFor="nome">Nome</label>
+      <div className={styles.formContainer}>
+        <main className={styles.content}>
+          <form onSubmit={handleEnlistUser}>
+            <label htmlFor="name">Nome</label>
             <input
               type="text"
-              id="nome"
+              id="name"
+              required
+              onChange={e => setName(e.target.value)}
             />
 
             <label htmlFor="email">E-mail</label>
             <input
-              type="text"
+              type="email"
               id="email"
+              required
+              onChange={e => setEmail(e.target.value)}
             />
 
             <label htmlFor="team">Time</label>
-            <select id="team">
-              <option value="Valorant">Valorant</option>
+            <select
+              id="team"
+              required
+              onChange={e => setTeam(e.target.value)}
+            >
+              <option value="Valorant" defaultChecked>Valorant</option>
               <option value="Fortnite">Fortnite</option>
             </select>
 
-            <input type="submit" value="ENVIAR" />
+            <button>Candidatar-se</button>
           </form>
-        </section>
-      </main>
+        </main>
+      </div>
     </>
   );
 }

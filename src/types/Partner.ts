@@ -1,4 +1,4 @@
-export type patnerProps = {
+export type PartnerProps = {
   name: string;
   url: string;
   icon: string;

@@ -1,4 +1,4 @@
-import { patnerProps } from "../../types/Patner";
+import { PartnerProps } from "../../types/Partner";
 
 import styles from "./styles.module.scss";
 
@@ -7,7 +7,7 @@ export function Patner({
   icon,
   coupon,
   url
-}: patnerProps) {
+}: PartnerProps) {
   return (
     <a
       href={url}
@@ -18,10 +18,10 @@ export function Patner({
       <div className={styles.patnerAbout}>
         <h3>{name}</h3>
 
-        <small>Cupom Desconto</small>
+        <p>Cupom Desconto</p>
         <div>
           <strong>{coupon.code}</strong>
-          <p>- {coupon.percentageValue}%</p>
+          <small>{coupon.percentageValue}%</small>
         </div>
       </div>
       <img src={icon} alt={`Logo da ${name}`} />

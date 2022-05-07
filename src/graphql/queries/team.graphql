@@ -1,0 +1,11 @@
+query Team($game: String!) {
+  team(where: { game: $game }) {
+    players {
+      id
+      name
+      photo {
+        url
+      }
+    }
+  }
+}

@@ -11,13 +11,33 @@ html {
   }
 
   @media (max-width: 728px) {
-    font-size: 87.5%;
+    font-size: 90.5%;
   }
 }
 
 body {
   background-color: #060908;
   color: #fff;
+}
+
+.swiper {
+  position: relative;
+
+  .swiper-button-next, 
+  .swiper-button-prev {
+    color: #FFF;
+    transform: scale(1);
+  }
+
+  .swiper-button-next {
+    position: absolute;
+    right: 0;
+  }
+  
+  .swiper-button-prev {
+    position: absolute;
+    left: 0;
+  }
 }
 
 a {

@@ -1,4 +1,4 @@
-export type Home = {
+export type PageQuery = {
   title: string;
   description: string;
   twitch: string;

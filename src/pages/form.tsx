@@ -37,7 +37,7 @@ export default function Form() {
             <input 
               type="hidden" 
               name="_next" 
-              value="http://localhost:3000/form" 
+              value="https://vaixell.vercel.app/form" 
             />
 
             <input 

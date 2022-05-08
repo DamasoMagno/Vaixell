@@ -1,32 +1,8 @@
 import Head from "next/head";
-import { FormEvent, useState } from "react";
-import { api } from "../services/api";
 
 import styles from "../styles/pages/Enlist.module.scss";
 
 export default function Form() {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [team, setTeam] = useState<string>("");
-
-  async function handleEnlistUser(e: FormEvent) {
-    e.preventDefault();
-
-    try {
-      const data = {
-        name,
-        email,
-        team
-      }
-
-      const response = await api.post("/enlist", { data });
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <>
       <Head>
@@ -35,29 +11,54 @@ export default function Form() {
 
       <div className={styles.formContainer}>
         <main className={styles.content}>
-          <form onSubmit={handleEnlistUser}>
+          <form action={`https://formsubmit.co/vaixelloficial@gmail.com`} method="POST">
             <label htmlFor="name">Nome</label>
             <input
               type="text"
               id="name"
+              name="nome"
               required
-              onChange={e => setName(e.target.value)}
             />
 
             <label htmlFor="email">E-mail</label>
             <input
               type="email"
               id="email"
+              name="email"
               required
-              onChange={e => setEmail(e.target.value)}
+            />
+
+            <input 
+              type="hidden" 
+              name="_template" 
+              value="basic" 
+            />
+
+            <input 
+              type="hidden" 
+              name="_next" 
+              value="http://localhost:3000/form" 
+            />
+
+            <input 
+              type="hidden" 
+              name="_captcha" 
+              value="false" 
+            />
+
+            <input 
+              type="hidden" 
+              name="_autoresponse" 
+              value="Parabéns, você se candidatou com sucesso" 
             />
 
             <label htmlFor="team">Time</label>
             <select
               id="team"
+              name="time"
               required
-              onChange={e => setTeam(e.target.value)}
             >
+
               <option value="Valorant" defaultChecked>Valorant</option>
               <option value="Fortnite">Fortnite</option>
             </select>

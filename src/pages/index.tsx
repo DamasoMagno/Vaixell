@@ -95,20 +95,23 @@ export default function Homes({
                 }
               }}
             >
-              {loadingTeam ? (
-                <h1>Carregando</h1>
-              ) : (
+              {!loadingTeam ? (
                 data?.team.players.map((player: any) => (
                   <SwiperSlide key={player.id}>
                     <div className={styles.player}>
-                      <img 
-                        src={player.photo?.url ?? "/assets/player.svg"} 
-                        alt={`Foto do jogador ${player.name}`} 
+                      <img
+                        src={player.photo?.url ?? "/assets/player.svg"}
+                        alt={`Foto do jogador ${player.name}`}
                       />
                       <strong>{player.name}</strong>
                     </div>
                   </SwiperSlide>
                 ))
+
+              ) : (
+                <div className={styles.loader}>
+                  <h1>Carregando Times</h1>
+                </div>
               )}
             </Swiper>
           </div>
@@ -192,6 +195,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       home: page
     },
-    revalidate: 25
+    revalidate: 60 * 1
   }
 }

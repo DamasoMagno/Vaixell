@@ -19,7 +19,7 @@ export default function Form() {
         team
       }
 
-      const response = await api.post("/", { data });
+      const response = await api.post("/enlist", { data });
 
       console.log(response);
     } catch (error) {

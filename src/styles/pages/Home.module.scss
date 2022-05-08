@@ -80,6 +80,14 @@
       }
     }
 
+    .loader {
+      width: 100%;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .playersTeam {
       margin-top: 0.5rem;
 

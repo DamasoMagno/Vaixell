@@ -129,7 +129,7 @@ export default function Homes({
           <SectionTitle>Acompanhar a Live</SectionTitle>
 
           <Player
-            url={"https://www.youtube.com/watch?v=3rxEC_TOfj8"}
+            url={home.twitch}
             width={"100%"}
             height={"30rem"}
           />

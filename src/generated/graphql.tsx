@@ -5353,7 +5353,7 @@ export type TeamQueryVariables = Exact<{
 }>;
 
 
-export type TeamQuery = { __typename?: 'Query', team?: { __typename?: 'Team', players: Array<{ __typename?: 'Player', id: string, name?: string | null, photo?: { __typename?: 'Asset', url: string } | null }> } | null };
+export type TeamQuery = { __typename?: 'Query', team?: { __typename?: 'Team', id: string, game?: string | null, players: Array<{ __typename?: 'Player', id: string, name?: string | null, photo?: { __typename?: 'Asset', url: string } | null }> } | null };
 
 
 export const PageDocument = gql`
@@ -5395,6 +5395,8 @@ export function usePageQuery(options: Omit<Urql.UseQueryArgs<PageQueryVariables>
 export const TeamDocument = gql`
     query Team($game: String!) {
   team(where: {game: $game}) {
+    id
+    game
     players {
       id
       name

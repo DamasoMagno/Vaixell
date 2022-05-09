@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
+import { MdMenu, MdClose } from "react-icons/md";
 
 import styles from "./styles.module.scss";
 
@@ -14,7 +16,7 @@ export function Header() {
           alt="Logo da Organização"
         />
 
-        <nav className={styles.navigation}>
+        <nav>
           <Link href="/">Sobre</Link>
           <Link href="/form">Alistar</Link>
         </nav>

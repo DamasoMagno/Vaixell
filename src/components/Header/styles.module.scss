@@ -28,5 +28,17 @@
         }
       }
     }
+
+    button {
+      display: none;
+      background-color: transparent;
+      border: 0;
+
+      svg {
+        color: #fff;
+        width: 2rem;
+        height: 2rem;
+      }
+    }
   }
 }

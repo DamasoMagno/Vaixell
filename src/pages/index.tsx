@@ -4,6 +4,12 @@ import Head from "next/head";
 import { useState } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import dynamic from "next/dynamic";
+
+const Player = dynamic(
+  () => import("react-player/youtube"),
+  { ssr: false }
+);
 
 import { client } from "../libs/urql";
 import { useQuery } from "urql";
@@ -115,6 +121,18 @@ export default function Homes({
               )}
             </Swiper>
           </div>
+        </div>
+      </section>
+
+      <section className={styles.streamContainer}>
+        <div className={styles.content}>
+          <SectionTitle>Acompanhar a Live</SectionTitle>
+
+          <Player
+            url={"https://www.youtube.com/watch?v=3rxEC_TOfj8"}
+            width={"100%"}
+            height={"30rem"}
+          />
         </div>
       </section>
 

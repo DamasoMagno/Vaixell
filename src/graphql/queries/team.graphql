@@ -1,5 +1,7 @@
 query Team($game: String!) {
   team(where: { game: $game }) {
+    id
+    game
     players {
       id
       name
